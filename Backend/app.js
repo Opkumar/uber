@@ -1,13 +1,23 @@
-const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 dotenv.config()
 
-app.use("/",(req,res)=>{
-    
-    res.send("hello om prakash")
-})
+const express = require("express");
+const connectDB = require("./db/db");
+const cors = require("cors");
+const userRoute = require("./routes/user.route");
 
-app.listen(process.env.PORT || 4000 ,()=>{
-    console.log(`server is running at port ${process.env.PORT}`)
-})
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+
+connectDB();
+
+// app.use("/",(req,res)=>{
+//     res.send("hello om prakash")
+// })
+app.use("/users",userRoute);
+
+module.exports = app;
