@@ -5,7 +5,9 @@ const express = require("express");
 const connectDB = require("./db/db");
 const cors = require("cors");
 const userRoute = require("./routes/user.route");
+const driverRoute = require("./routes/driver.route");
 const cookieParser = require("cookie-parser");
+
 
 const app = express();
 
@@ -18,8 +20,10 @@ app.use(cookieParser());
 connectDB();
 
 // app.use("/",(req,res)=>{
-//     res.send("hello om prakash")
+//     res.send("Welcome to the API");
 // })
 app.use("/users",userRoute);
+app.use("/drivers",driverRoute);
+
 
 module.exports = app;
